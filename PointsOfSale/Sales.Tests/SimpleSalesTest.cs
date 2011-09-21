@@ -23,7 +23,7 @@ namespace Sales.Tests
         [Test]
         public void ArticleShouldGetPriceInEuros()
         {
-            _salesPoint.Scan("12345");
+            _scanner.OnBarcode("12345");
             Assert.AreEqual("EUR 500.00", _screen.Display, "The price of 12345 should be 500.00");
         }
 
