@@ -13,10 +13,10 @@ namespace Sales.Tests
         [SetUp]
         public void InitializeScanningSystem()
         {
-            _salesPoint = new SalesPoint();
             _scanner = new Scanner();
             _screen = new Screen();
-            _salesPoint = new SalesPoint(_scanner, _screen);
+            var catalog = new Catalog();
+            _salesPoint = new SalesPoint(catalog, _scanner, _screen);
         }
 
         [Test]

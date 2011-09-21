@@ -2,7 +2,14 @@
 
 namespace ScannerLib
 {
-    public class Catalog
+    public interface ICatalog
+    {
+        double this[string barcode] { get; }
+
+        bool HasBarcode(string barcode);
+    }
+
+    public class Catalog : ICatalog
     {
         private readonly Dictionary<string, double> _prices;
 

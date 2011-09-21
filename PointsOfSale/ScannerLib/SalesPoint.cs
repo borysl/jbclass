@@ -2,18 +2,13 @@
 {
     public class SalesPoint
     {
-        private Catalog _catalog;
+        private readonly ICatalog _catalog;
+        private readonly IScanner _scanner;
+        private readonly IScreen _screen;
 
-        private Scanner _scanner;
-        private Screen _screen;
-
-        public SalesPoint()
+        public SalesPoint(ICatalog catalog, IScanner scanner, IScreen screen)
         {
-        }
-
-        public SalesPoint(Scanner scanner, Screen screen)
-        {
-            _catalog = new Catalog();
+            _catalog = catalog;
 
             _scanner = scanner;
             _scanner.BarcodeScanned += (s, e) => { Scan(e.Barcode); };

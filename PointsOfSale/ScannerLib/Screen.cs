@@ -2,7 +2,16 @@
 
 namespace ScannerLib
 {
-    public class Screen
+    public interface IScreen
+    {
+        void DisplayPrice(double price);
+
+        void DisplayProductNotFound(string barcode);
+
+        void DisplayEmptyBarcodeError();
+    }
+
+    public class Screen : IScreen
     {
         private readonly NumberFormatInfo _numberFormatInfo;
 
