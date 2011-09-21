@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-
-namespace ScannerLib
+﻿namespace ScannerLib
 {
     public class SalesPoint
     {
-        private Dictionary<string, double> _priceList;
+        private Catalog _catalog;
 
         private Scanner _scanner;
         private Screen _screen;
@@ -16,9 +13,7 @@ namespace ScannerLib
 
         public SalesPoint(Scanner scanner, Screen screen)
         {
-            _priceList = new Dictionary<string, double>();
-            _priceList.Add("12345", 500.00);
-            _priceList.Add("23456", 750.00);
+            _catalog = new Catalog();
 
             _scanner = scanner;
             _scanner.BarcodeScanned += (s, e) => { Scan(e.Barcode); };
@@ -32,9 +27,9 @@ namespace ScannerLib
             {
                 _screen.DisplayEmptyBarcodeError();
             } 
-            else if (_priceList.ContainsKey(barcode))
+            else if (_catalog.HasBarcode(barcode))
             {
-                var price = _priceList[barcode];
+                var price = _catalog[barcode];
                 
                 _screen.DisplayPrice(price);
             }
