@@ -28,25 +28,25 @@ namespace Sales.Tests
             Assert.AreEqual("EUR 500.00", _screen.Display);
         }
 
-        [Test]
-        public void EmptyBarcodeOutputsError()
-        {
-            _salesPoint.Scan(string.Empty);
-            Assert.AreEqual("Scan error: Empty barcode", _screen.Display);
-        }
+        //[Test]
+        //public void EmptyBarcodeOutputsError()
+        //{
+        //    _salesPoint.Scan(string.Empty);
+        //    Assert.AreEqual("Scan error: Empty barcode", _screen.Display);
+        //}
 
-        [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void NullBarcodeProducesException()
-        {
-            _salesPoint.Scan(null);
-        }
+        //[Test]
+        //[ExpectedException(typeof(NullReferenceException))]
+        //public void NullBarcodeProducesException()
+        //{
+        //    _salesPoint.Scan(null);
+        //}
 
-        [Test]
-        public void NotProductFoundOutputsError()
-        {
-            _salesPoint.Scan("999999");
-            Assert.AreEqual("No product found: 999999", _screen.Display);
-        }
+        //[Test]
+        //public void NotProductFoundOutputsError()
+        //{
+        //    _salesPoint.Scan("999999");
+        //    Assert.AreEqual("No product found: 999999", _screen.Display);
+        //}
     }
 }
