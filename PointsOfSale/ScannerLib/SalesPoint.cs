@@ -18,6 +18,7 @@ namespace ScannerLib
         {
             _priceList = new Dictionary<string, double>();
             _priceList.Add("12345", 500.00);
+            _priceList.Add("23456", 750.00);
 
             _scanner = scanner;
             _scanner.BarcodeScanned += (s, e) => { Scan(e.Barcode); };

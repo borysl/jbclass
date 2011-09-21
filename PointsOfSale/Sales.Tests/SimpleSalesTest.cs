@@ -27,6 +27,13 @@ namespace Sales.Tests
         }
 
         [Test]
+        public void AnotherArticleWithDifferentPriceInEuros()
+        {
+            _scanner.OnBarcode("23456");
+            Assert.AreEqual("EUR 750.00", _screen.Display, "The price of 234567 should be 750.00");
+        }
+
+        [Test]
         public void EmptyBarcodeOutputsError()
         {
             _scanner.OnBarcode(string.Empty);
