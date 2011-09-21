@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using SimpleScanner;
+using ScannerLib;
 
 namespace Sales.Tests
 {

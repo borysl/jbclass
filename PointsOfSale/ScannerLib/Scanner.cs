@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleScanner
+namespace ScannerLib
 {
     public class Scanner : IScanner
     {

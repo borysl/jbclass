@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 
-namespace SimpleScanner
+namespace ScannerLib
 {
     public class SalesPoint
     {

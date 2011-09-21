@@ -50,9 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleScanner\SimpleScanner.csproj">
-      <Project>{7D156049-148E-43FC-93DA-4F5A95F447EE}</Project>
-      <Name>SimpleScanner</Name>
+    <ProjectReference Include="..\ScannerLib\ScannerLib.csproj">
+      <Project>{CF0CD845-2CDA-4F4E-8B08-DF3BC2F17DF5}</Project>
+      <Name>ScannerLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

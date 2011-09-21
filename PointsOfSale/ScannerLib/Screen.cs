@@ -1,4 +1,4 @@
-﻿namespace SimpleScanner
+﻿namespace ScannerLib
 {
     public class Screen
     {
