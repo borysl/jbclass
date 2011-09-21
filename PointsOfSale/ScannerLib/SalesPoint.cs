@@ -5,8 +5,6 @@ namespace ScannerLib
 {
     public class SalesPoint
     {
-        private readonly NumberFormatInfo _numberFormatInfo;
-
         private Dictionary<string, double> _priceList;
 
         private Scanner _scanner;
@@ -18,7 +16,6 @@ namespace ScannerLib
 
         public SalesPoint(Scanner scanner, Screen screen)
         {
-            _numberFormatInfo = new NumberFormatInfo { CurrencyDecimalSeparator = "." };
             _priceList = new Dictionary<string, double>();
             _priceList.Add("12345", 500.00);
 
@@ -32,17 +29,17 @@ namespace ScannerLib
         {
             if (string.IsNullOrEmpty(barcode))
             {
-                _screen.Display = "Scan error: Empty barcode.";
+                _screen.DisplayEmptyBarcodeError();
             } 
             else if (_priceList.ContainsKey(barcode))
             {
                 var price = _priceList[barcode];
                 
-                _screen.Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", price);
+                _screen.DisplayPrice(price);
             }
             else
             {
-                _screen.Display = string.Format("No product found: {0}.", barcode);
+                _screen.DisplayProductNotFound(barcode);
             }
         }
     }
