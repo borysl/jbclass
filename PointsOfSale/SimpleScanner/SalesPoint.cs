@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 
 namespace SimpleScanner
@@ -15,25 +14,27 @@ namespace SimpleScanner
 
         public SalesPoint()
         {
+        }
+
+        public SalesPoint(Scanner scanner, Screen screen)
+        {
             _numberFormatInfo = new NumberFormatInfo { CurrencyDecimalSeparator = "." };
             _priceList = new Dictionary<string, double>();
             _priceList.Add("12345", 500.00);
-        }
 
-        public void PlugScanner(Scanner scanner)
-        {
             _scanner = scanner;
             _scanner.BarcodeScanned += (s, e) => { Scan(e.Barcode); };
-        }
 
-        public void PlugLcdScreen(Screen screen)
-        {
             _screen = screen;
         }
 
         private void Scan(string barcode)
         {
-            if (_priceList.ContainsKey(barcode))
+            if (string.IsNullOrEmpty(barcode))
+            {
+                _screen.Display = "Scan error: Empty barcode.";
+            } 
+            else if (_priceList.ContainsKey(barcode))
             {
                 var price = _priceList[barcode];
                 
@@ -41,7 +42,7 @@ namespace SimpleScanner
             }
             else
             {
-                _screen.Display = string.Format("No product found: {0}", barcode);
+                _screen.Display = string.Format("No product found: {0}.", barcode);
             }
         }
     }

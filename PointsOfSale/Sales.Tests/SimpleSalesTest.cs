@@ -16,8 +16,7 @@ namespace Sales.Tests
             _salesPoint = new SalesPoint();
             _scanner = new Scanner();
             _screen = new Screen();
-            _salesPoint.PlugScanner(_scanner);
-            _salesPoint.PlugLcdScreen(_screen);
+            _salesPoint = new SalesPoint(_scanner, _screen);
         }
 
         [Test]
@@ -27,12 +26,12 @@ namespace Sales.Tests
             Assert.AreEqual("EUR 500.00", _screen.Display, "The price of 12345 should be 500.00");
         }
 
-        //[Test]
-        //public void EmptyBarcodeOutputsError()
-        //{
-        //    _salesPoint.Scan(string.Empty);
-        //    Assert.AreEqual("Scan error: Empty barcode", _screen.Display);
-        //}
+        [Test]
+        public void EmptyBarcodeOutputsError()
+        {
+            _scanner.OnBarcode(string.Empty);
+            Assert.AreEqual("Scan error: Empty barcode.", _screen.Display);
+        }
 
         //[Test]
         //[ExpectedException(typeof(NullReferenceException))]
@@ -41,11 +40,11 @@ namespace Sales.Tests
         //    _salesPoint.Scan(null);
         //}
 
-        //[Test]
-        //public void NotProductFoundOutputsError()
-        //{
-        //    _salesPoint.Scan("999999");
-        //    Assert.AreEqual("No product found: 999999", _screen.Display);
-        //}
+        [Test]
+        public void NotProductFoundOutputsError()
+        {
+            _scanner.OnBarcode("999999");
+            Assert.AreEqual("No product found: 999999.", _screen.Display);
+        }
     }
 }
