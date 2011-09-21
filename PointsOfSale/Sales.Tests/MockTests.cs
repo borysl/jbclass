@@ -17,6 +17,7 @@ namespace Sales.Tests
 
             var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
             mockCatalogBuilder.ExpectAndReturn("get_Item", 500.0, "12345");
+            mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, "12345");
 
             var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
 
