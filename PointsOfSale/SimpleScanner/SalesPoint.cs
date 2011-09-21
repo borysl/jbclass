@@ -4,19 +4,22 @@ namespace SimpleScanner
 {
     public class SalesPoint
     {
-        public void PlugScanner(object scanner)
+        private Scanner _scanner;
+        private Screen _screen;
+
+        public void PlugScanner(Scanner scanner)
         {
-            throw new NotImplementedException();
+            _scanner = scanner;
         }
 
-        public void PlugLcdScreen(object screen)
+        public void PlugLcdScreen(Screen screen)
         {
-            throw new NotImplementedException();
+            _screen = screen;
         }
 
         public void Scan(string s)
         {
-
+            _screen.Display = "EUR 500.00";
         }
     }
 }
