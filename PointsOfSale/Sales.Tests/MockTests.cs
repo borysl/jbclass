@@ -11,7 +11,7 @@ namespace Sales.Tests
         public void FoundProductShouldOutputPrice()
         {
             var mockScreenBuilder = new DynamicMock(typeof(IScreen));
-            mockScreenBuilder.Expect("DisplayPrice", "EUR 500.00");
+            mockScreenBuilder.Expect("DisplayPrice", 500.0);
 
             var mockScreen = (IScreen)mockScreenBuilder.MockInstance;
 
