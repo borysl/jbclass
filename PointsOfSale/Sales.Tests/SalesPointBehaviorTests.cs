@@ -44,9 +44,7 @@ namespace Sales.Tests
 
             var mockCatalog = (ICatalog)_mockCatalogBuilder.MockInstance;
 
-            var scanner = new Scanner();
-
-            var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
+            var salesPoint = new SalesPoint(mockCatalog, mockScreen);
 
             salesPoint.Scan(testBarcode);
         }
@@ -66,9 +64,7 @@ namespace Sales.Tests
 
             var mockCatalog = (ICatalog)_mockCatalogBuilder.MockInstance;
 
-            var scanner = new Scanner();
-
-            var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
+            var salesPoint = new SalesPoint(mockCatalog, mockScreen);
 
             salesPoint.Scan(testBarcode);
         }

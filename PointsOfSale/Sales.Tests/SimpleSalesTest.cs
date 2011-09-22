@@ -7,39 +7,37 @@ namespace Sales.Tests
     public class SimpleSalesTest
     {
         private SalesPoint _salesPoint;
-        private Scanner _scanner;
         private CashRegisterDisplay _cashRegisterDisplay;
 
         [SetUp]
         public void InitializeScanningSystem()
         {
-            _scanner = new Scanner();
             _cashRegisterDisplay = new CashRegisterDisplay();
             IEditableCatalog catalog = new Catalog();
             catalog.AddPriceWithoutPst("12345", 500.00);
             catalog.AddPriceWithPst("23456", 750.00);
 
-            _salesPoint = new SalesPoint(catalog, _scanner, _cashRegisterDisplay);
+            _salesPoint = new SalesPoint(catalog, _cashRegisterDisplay);
         }
 
         [Test]
         public void ArticleShouldGetPriceInEuros()
         {
-            _scanner.OnBarcode("12345");
+            _salesPoint.Scan("12345");
             Assert.AreEqual("EUR 500.00 G\nTotal: EUR 525.00", _cashRegisterDisplay.Display, "The price of 12345 should be 500.00 with total price");
         }
 
         [Test]
         public void AnotherArticleWithDifferentPriceInEuros()
         {
-            _scanner.OnBarcode("23456");
+            _salesPoint.Scan("23456");
             Assert.AreEqual("EUR 750.00 GP\nTotal: EUR 866.25", _cashRegisterDisplay.Display, "The price of 23456 should be 750.00 with total price 787.50");
         }
 
         [Test]
         public void EmptyBarcodeOutputsError()
         {
-            _scanner.OnBarcode(string.Empty);
+            _salesPoint.Scan(string.Empty);
             Assert.AreEqual("Scan error: Empty barcode.", _cashRegisterDisplay.Display);
         }
 
@@ -53,7 +51,7 @@ namespace Sales.Tests
         [Test]
         public void NotProductFoundOutputsError()
         {
-            _scanner.OnBarcode("999999");
+            _salesPoint.Scan("999999");
             Assert.AreEqual("No product found: 999999.", _cashRegisterDisplay.Display);
         }
     }
