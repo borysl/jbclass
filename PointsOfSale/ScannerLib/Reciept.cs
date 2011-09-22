@@ -12,6 +12,14 @@ namespace ScannerLib
             _price = new List<PriceWithTaxes>();
         }
 
+        public double NetTotal { get; set; }
+
+        public double GstTotal { get; set; }
+
+        public double PstTotal { get; set; }
+
+        public double Total { get; set; }
+
         public void AddRecordWithoutPst(double price)
         {
             var fullPrice = new PriceWithTaxes { NetPrice = price, PstIncluded = false };
@@ -24,6 +32,10 @@ namespace ScannerLib
             if (anotherReciept == null) return false;
 
             if (anotherReciept._price.Count != _price.Count) return false;
+            if (anotherReciept.Total != Total) return false;
+            if (anotherReciept.PstTotal != PstTotal) return false;
+            if (anotherReciept.GstTotal != GstTotal) return false;
+            if (anotherReciept.NetTotal != NetTotal) return false;
 
             return !_price.Where((t, i) => !t.Equals(anotherReciept._price[i])).Any();
         }

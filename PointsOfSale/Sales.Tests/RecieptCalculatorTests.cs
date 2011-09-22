@@ -14,6 +14,10 @@ namespace Sales.Tests
 
             var etalonReciept = new Reciept();
             etalonReciept.AddRecordWithoutPst(500.00);
+            etalonReciept.NetTotal = 500.00;
+            etalonReciept.GstTotal = 25.00;
+            etalonReciept.PstTotal = 0.0;
+            etalonReciept.Total = 525.00;
 
             var recieptConsumer = mocks.StrictMock<IRecieptConsumer>();
             Expect.Call(delegate { recieptConsumer.PrintReciept(etalonReciept); });
