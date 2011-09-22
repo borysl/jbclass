@@ -13,7 +13,7 @@ namespace Sales.Tests
         [SetUp]
         public void Initialize()
         {
-            _mockScreenBuilder = new DynamicMock(typeof(IScreen));
+            _mockScreenBuilder = new DynamicMock(typeof(ICashRegisterDisplay));
             _mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
         }
 
@@ -37,7 +37,7 @@ namespace Sales.Tests
 
             _mockScreenBuilder.Expect("DisplayProductInfo", testPrice);
 
-            var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;
+            var mockScreen = (ICashRegisterDisplay)_mockScreenBuilder.MockInstance;
 
             _mockCatalogBuilder.ExpectAndReturn("get_Item", testPrice, testBarcode);
             _mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, testBarcode);
@@ -59,7 +59,7 @@ namespace Sales.Tests
             _mockScreenBuilder.ExpectNoCall("DisplayProductInfo");
             _mockScreenBuilder.Expect("DisplayProductNotFound", testBarcode);
 
-            var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;
+            var mockScreen = (ICashRegisterDisplay)_mockScreenBuilder.MockInstance;
 
             _mockCatalogBuilder.ExpectNoCall("get_Item");
             _mockCatalogBuilder.ExpectAndReturn("HasBarcode", false, testBarcode);

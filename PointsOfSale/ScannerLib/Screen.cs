@@ -2,7 +2,7 @@
 
 namespace ScannerLib
 {
-    public interface IScreen
+    public interface ICashRegisterDisplay
     {
         void DisplayProductNotFound(string barcode);
 
@@ -11,11 +11,11 @@ namespace ScannerLib
         void DisplayProductInfo(PriceWithTaxes testPrice);
     }
 
-    public class Screen : IScreen
+    public class CashRegisterDisplay : ICashRegisterDisplay
     {
         private readonly NumberFormatInfo _numberFormatInfo;
 
-        public Screen()
+        public CashRegisterDisplay()
         {
             _numberFormatInfo = new NumberFormatInfo { CurrencyDecimalSeparator = "." };
         }

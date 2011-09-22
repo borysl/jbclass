@@ -4,33 +4,33 @@
     {
         private readonly ICatalog _catalog;
         private readonly IScanner _scanner;
-        private readonly IScreen _screen;
+        private readonly ICashRegisterDisplay _cashRegisterDisplay;
 
-        public SalesPoint(ICatalog catalog, IScanner scanner, IScreen screen)
+        public SalesPoint(ICatalog catalog, IScanner scanner, ICashRegisterDisplay cashRegisterDisplay)
         {
             _catalog = catalog;
 
             _scanner = scanner;
             _scanner.BarcodeScanned += (s, e) => { Scan(e.Barcode); };
 
-            _screen = screen;
+            _cashRegisterDisplay = cashRegisterDisplay;
         }
 
         public void Scan(string barcode)
         {
             if (string.IsNullOrEmpty(barcode))
             {
-                _screen.DisplayEmptyBarcodeError();
+                _cashRegisterDisplay.DisplayEmptyBarcodeError();
             } 
             else if (_catalog.HasBarcode(barcode))
             {
                 var price = _catalog[barcode];
                 
-                _screen.DisplayProductInfo(price);
+                _cashRegisterDisplay.DisplayProductInfo(price);
             }
             else
             {
-                _screen.DisplayProductNotFound(barcode);
+                _cashRegisterDisplay.DisplayProductNotFound(barcode);
             }
         }
     }
