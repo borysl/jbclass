@@ -10,14 +10,17 @@ namespace Sales.Tests
         [Test]
         public void FoundProductShouldOutputPrice()
         {
+            const double testPrice = 500.0;
+            const string testBarcode = "12345";
+
             var mockScreenBuilder = new DynamicMock(typeof(IScreen));
-            mockScreenBuilder.Expect("DisplayPrice", 500.0);
+            mockScreenBuilder.Expect("DisplayPrice", testPrice);
 
             var mockScreen = (IScreen)mockScreenBuilder.MockInstance;
 
             var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
-            mockCatalogBuilder.ExpectAndReturn("get_Item", 500.0, "12345");
-            mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, "12345");
+            mockCatalogBuilder.ExpectAndReturn("get_Item", testPrice, testBarcode);
+            mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, testBarcode);
 
             var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
 
@@ -25,7 +28,7 @@ namespace Sales.Tests
 
             var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
 
-            scanner.OnBarcode("12345");
+            salesPoint.Scan(testBarcode);
 
             mockScreenBuilder.Verify();
             mockCatalogBuilder.Verify();

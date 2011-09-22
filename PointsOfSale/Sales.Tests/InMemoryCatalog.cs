@@ -1,5 +1,5 @@
-﻿using ScannerLib;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using ScannerLib;
 
 namespace Sales.Tests
 {

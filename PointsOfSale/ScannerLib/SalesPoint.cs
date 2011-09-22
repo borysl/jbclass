@@ -16,7 +16,7 @@
             _screen = screen;
         }
 
-        private void Scan(string barcode)
+        public void Scan(string barcode)
         {
             if (string.IsNullOrEmpty(barcode))
             {
