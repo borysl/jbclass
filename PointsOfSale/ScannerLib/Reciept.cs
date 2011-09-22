@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace ScannerLib
 {
-    public class Reciept
+    public class Receipt
     {
         private readonly List<ProductPriceInfo> _price;
 
-        public Reciept()
+        public Receipt()
         {
             _price = new List<ProductPriceInfo>();
         }
@@ -33,16 +33,16 @@ namespace ScannerLib
 
         public override bool Equals(object obj)
         {
-            var anotherReciept = obj as Reciept;
-            if (anotherReciept == null) return false;
+            var anotherReceipt = obj as Receipt;
+            if (anotherReceipt == null) return false;
 
-            if (anotherReciept._price.Count != _price.Count) return false;
-            if (anotherReciept.Total != Total) return false;
-            if (anotherReciept.PstTotal != PstTotal) return false;
-            if (anotherReciept.GstTotal != GstTotal) return false;
-            if (anotherReciept.NetTotal != NetTotal) return false;
+            if (anotherReceipt._price.Count != _price.Count) return false;
+            if (anotherReceipt.Total != Total) return false;
+            if (anotherReceipt.PstTotal != PstTotal) return false;
+            if (anotherReceipt.GstTotal != GstTotal) return false;
+            if (anotherReceipt.NetTotal != NetTotal) return false;
 
-            return !_price.Where((t, i) => !t.Equals(anotherReciept._price[i])).Any();
+            return !_price.Where((t, i) => !t.Equals(anotherReceipt._price[i])).Any();
         }
 
         public override int GetHashCode()

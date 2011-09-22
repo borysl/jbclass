@@ -1,23 +1,23 @@
 ﻿namespace ScannerLib
 {
-    public class RecieptCalculator
+    public class ReceiptCalculator
     {
-        private readonly IRecieptConsumer _recieptConsumer;
+        private readonly IReceiptConsumer _recieptConsumer;
 
-        public RecieptCalculator(IRecieptConsumer recieptConsumer)
+        public ReceiptCalculator(IReceiptConsumer recieptConsumer)
         {
             _recieptConsumer = recieptConsumer;
         }
 
         public void ProcessProduct(ProductPriceInfo price)
         {
-            var reciept = new Reciept();
+            var reciept = new Receipt();
             reciept.AddRecord(price);
             reciept.NetTotal = price.NetPrice;
             reciept.GstTotal = SalesCalculator.CalculateGst(price);
             reciept.PstTotal = SalesCalculator.CalculatePst(price);
             reciept.Total = SalesCalculator.CalculateCost(price);
-            _recieptConsumer.PrintReciept(reciept);
+            _recieptConsumer.PrintReceipt(reciept);
         }
     }
 }

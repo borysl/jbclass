@@ -5,7 +5,7 @@ using ScannerLib;
 namespace Sales.Tests
 {
     [TestFixture]
-    public class RecieptCalculatorTests
+    public class ReceiptCalculatorTests
     {
         private MockRepository _mocks;
 
@@ -22,46 +22,46 @@ namespace Sales.Tests
         }
 
         [Test]
-        public void CreateRecieptForSingleItemWithoutPst()
+        public void CreateReceiptForSingleItemWithoutPst()
         {
-            var etalonReciept = new Reciept();
+            var etalonReceipt = new Receipt();
             var price = new ProductPriceInfo(500.00);
 
-            etalonReciept.AddRecord(price);
-            etalonReciept.NetTotal = 500.00;
-            etalonReciept.GstTotal = 25.00;
-            etalonReciept.PstTotal = 0.0;
-            etalonReciept.Total = 525.00;
+            etalonReceipt.AddRecord(price);
+            etalonReceipt.NetTotal = 500.00;
+            etalonReceipt.GstTotal = 25.00;
+            etalonReceipt.PstTotal = 0.0;
+            etalonReceipt.Total = 525.00;
 
-            var recieptConsumer = _mocks.StrictMock<IRecieptConsumer>();
-            Expect.Call(delegate { recieptConsumer.PrintReciept(etalonReciept); });
+            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(delegate { recieptConsumer.PrintReceipt(etalonReceipt); });
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new RecieptCalculator(recieptConsumer);
+            var recieptCalculator = new ReceiptCalculator(recieptConsumer);
 
             recieptCalculator.ProcessProduct(price);
         }
 
         [Test]
-        public void CreateRecieptForSingleItemWithPst()
+        public void CreateReceiptForSingleItemWithPst()
         {
-            var etalonReciept = new Reciept();
+            var etalonReceipt = new Receipt();
 
             var price = new ProductPriceInfo(100.00) { PstIncluded = true };
 
-            etalonReciept.AddRecord(price);
-            etalonReciept.NetTotal = 100.00;
-            etalonReciept.GstTotal = 5.00;
-            etalonReciept.PstTotal = 10.5;
-            etalonReciept.Total = 115.5;
+            etalonReceipt.AddRecord(price);
+            etalonReceipt.NetTotal = 100.00;
+            etalonReceipt.GstTotal = 5.00;
+            etalonReceipt.PstTotal = 10.5;
+            etalonReceipt.Total = 115.5;
 
-            var recieptConsumer = _mocks.StrictMock<IRecieptConsumer>();
-            Expect.Call(delegate { recieptConsumer.PrintReciept(etalonReciept); });
+            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(delegate { recieptConsumer.PrintReceipt(etalonReceipt); });
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new RecieptCalculator(recieptConsumer);
+            var recieptCalculator = new ReceiptCalculator(recieptConsumer);
 
             recieptCalculator.ProcessProduct(price);
         }

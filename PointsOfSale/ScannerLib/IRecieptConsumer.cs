@@ -1,7 +1,7 @@
 ﻿namespace ScannerLib
 {
-    public interface IRecieptConsumer
+    public interface IReceiptConsumer
     {
-        void PrintReciept(Reciept reciept);
+        void PrintReceipt(Receipt reciept);
     }
 }
