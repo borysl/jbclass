@@ -5,7 +5,7 @@ using ScannerLib;
 namespace Sales.Tests
 {
     [TestFixture]
-    public class NMockTests
+    public class SalesPointBehaviorTests
     {
         private DynamicMock _mockScreenBuilder;
         private DynamicMock _mockCatalogBuilder;

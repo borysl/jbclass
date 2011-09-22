@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="CatalogContract.cs" />
     <Compile Include="InMemoryCatalogTests.cs" />
-    <Compile Include="NMockTests.cs" />
+    <Compile Include="SalesPointBehaviorTests.cs" />
     <Compile Include="SalesTaxesTests.cs" />
     <Compile Include="SimpleSalesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

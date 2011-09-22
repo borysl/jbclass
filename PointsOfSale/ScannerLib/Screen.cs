@@ -26,11 +26,6 @@ namespace ScannerLib
             private set;
         }
 
-        private void DisplayPrice(double price)
-        {
-            Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", price);
-        }
-
         public void DisplayProductNotFound(string barcode)
         {
             Display = string.Format("No product found: {0}.", barcode);
@@ -43,7 +38,7 @@ namespace ScannerLib
 
         public void DisplayPrice(PriceWithTaxes testPrice)
         {
-            DisplayPrice(testPrice.NetPrice);
+            Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", testPrice.NetPrice);
         }
     }
 }
