@@ -45,6 +45,7 @@
     <Compile Include="IRecieptConsumer.cs" />
     <Compile Include="ISalesPoint.cs" />
     <Compile Include="PriceWithTaxes.cs" />
+    <Compile Include="ProductPriceInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reciept.cs" />
     <Compile Include="RecieptCalculator.cs" />
