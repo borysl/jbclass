@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatalogContract.cs" />
-    <Compile Include="InMemoryCatalog.cs" />
+    <Compile Include="InMemoryCatalogTests.cs" />
     <Compile Include="MockTests.cs" />
     <Compile Include="SimpleSalesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
