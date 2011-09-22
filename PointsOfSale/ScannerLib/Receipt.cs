@@ -5,11 +5,11 @@ namespace ScannerLib
 {
     public class Receipt
     {
-        private readonly List<ProductPriceInfo> _price;
+        private readonly List<ReceiptRecord> _price;
 
         public Receipt()
         {
-            _price = new List<ProductPriceInfo>();
+            _price = new List<ReceiptRecord>();
         }
 
         public double NetTotal { get; set; }
@@ -20,15 +20,9 @@ namespace ScannerLib
 
         public double Total { get; set; }
 
-        public void AddRecord(ProductPriceInfo price)
+        public void AddRecord(ReceiptRecord price)
         {
             _price.Add(price);
-        }
-
-        public void AddRecordWithoutPst(double price)
-        {
-            var fullPrice = new ProductPriceInfo { NetPrice = price, PstIncluded = false };
-            _price.Add(fullPrice);
         }
 
         public override bool Equals(object obj)

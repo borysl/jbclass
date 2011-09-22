@@ -15,16 +15,18 @@
 
         public void ProcessProduct(string barcode)
         {
-            ProcessProduct(_catalog[barcode]);
+            var itemName = string.Format("Item #{0}", barcode);
+            var receiptRecord = new ReceiptRecord(itemName, _catalog[barcode]);
+            ProcessProduct(receiptRecord);
         }
 
-        public void ProcessProduct(ProductPriceInfo price)
+        public void ProcessProduct(ReceiptRecord receiptRecord)
         {
-            _receipt.AddRecord(price);
-            _receipt.NetTotal += price.NetPrice;
-            _receipt.GstTotal += SalesCalculator.CalculateGst(price);
-            _receipt.PstTotal += SalesCalculator.CalculatePst(price);
-            _receipt.Total += SalesCalculator.CalculateCost(price);
+            _receipt.AddRecord(receiptRecord);
+            _receipt.NetTotal += receiptRecord.PriceInfo.NetPrice;
+            _receipt.GstTotal += SalesCalculator.CalculateGst(receiptRecord.PriceInfo);
+            _receipt.PstTotal += SalesCalculator.CalculatePst(receiptRecord.PriceInfo);
+            _receipt.Total += SalesCalculator.CalculateCost(receiptRecord.PriceInfo);
         }
 
         public void Print()

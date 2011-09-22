@@ -31,7 +31,7 @@ namespace Sales.Tests
         public void CreateReceiptForSingleItemWithoutPst()
         {
             var etalonReceipt = new Receipt();
-            var price = new ReceiptRecord("Item #12345", 500.00);
+            var price = new ReceiptRecord("Item #12345", new ProductPriceInfo(500.00));
 
             etalonReceipt.AddRecord(price);
             etalonReceipt.NetTotal = 500.00;
@@ -55,7 +55,7 @@ namespace Sales.Tests
         {
             var etalonReceipt = new Receipt();
 
-            var price = new ReceiptRecord("Item #23456", 100.00) { PstIncluded = true };
+            var price = new ReceiptRecord("Item #23456", new ProductPriceInfo(100.00) { PstIncluded = true });
 
             etalonReceipt.AddRecord(price);
             etalonReceipt.NetTotal = 100.00;
@@ -79,8 +79,8 @@ namespace Sales.Tests
         {
             var etalonReceipt = new Receipt();
 
-            var priceOne = new ReceiptRecord("Item #12345", 500.00);
-            var priceTwo = new ReceiptRecord("Item #23456", 100.00) { PstIncluded = true };
+            var priceOne = new ReceiptRecord("Item #12345", new ProductPriceInfo(500.00));
+            var priceTwo = new ReceiptRecord("Item #23456", new ProductPriceInfo(100.00) { PstIncluded = true });
 
             etalonReceipt.AddRecord(priceOne);
             etalonReceipt.AddRecord(priceTwo);
@@ -100,16 +100,5 @@ namespace Sales.Tests
             receiptCalculator.ProcessProduct("23456");
             receiptCalculator.Print();
         }
-    }
-
-    public class ReceiptRecord : ProductPriceInfo
-    {
-        public ReceiptRecord(string itemName, double price)
-            : base(price)
-        {
-            ItemName = itemName;
-        }
-
-        public string ItemName { get; set; }
     }
 }
