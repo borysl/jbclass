@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Catalog.cs" />
+    <Compile Include="ICashRegisterDisplay.cs" />
     <Compile Include="IScanner.cs" />
     <Compile Include="PriceWithTaxes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
