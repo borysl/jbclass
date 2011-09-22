@@ -26,7 +26,7 @@
             {
                 var price = _catalog[barcode];
                 
-                _screen.DisplayPrice(price);
+                _screen.DisplayProductInfo(price);
             }
             else
             {

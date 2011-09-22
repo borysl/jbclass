@@ -35,7 +35,7 @@ namespace Sales.Tests
 
             const string testBarcode = "12345";
 
-            _mockScreenBuilder.Expect("DisplayPrice", testPrice);
+            _mockScreenBuilder.Expect("DisplayProductInfo", testPrice);
 
             var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;
 
@@ -56,7 +56,7 @@ namespace Sales.Tests
         {
             const string testBarcode = "12345";
 
-            _mockScreenBuilder.ExpectNoCall("DisplayPrice");
+            _mockScreenBuilder.ExpectNoCall("DisplayProductInfo");
             _mockScreenBuilder.Expect("DisplayProductNotFound", testBarcode);
 
             var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;

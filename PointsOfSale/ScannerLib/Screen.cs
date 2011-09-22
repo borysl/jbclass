@@ -8,7 +8,7 @@ namespace ScannerLib
 
         void DisplayEmptyBarcodeError();
 
-        void DisplayPrice(PriceWithTaxes testPrice);
+        void DisplayProductInfo(PriceWithTaxes testPrice);
     }
 
     public class Screen : IScreen
@@ -36,7 +36,7 @@ namespace ScannerLib
             Display = "Scan error: Empty barcode.";
         }
 
-        public void DisplayPrice(PriceWithTaxes testPrice)
+        public void DisplayProductInfo(PriceWithTaxes testPrice)
         {
             Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", testPrice.NetPrice);
         }
