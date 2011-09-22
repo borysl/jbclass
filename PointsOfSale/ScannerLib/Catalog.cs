@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ScannerLib
 {
@@ -10,18 +9,25 @@ namespace ScannerLib
         bool HasBarcode(string barcode);
     }
 
-    public class Catalog : ICatalog
+    public interface IEditableCatalog : ICatalog
     {
-        private readonly Dictionary<string, double> _prices;
+        void AddPriceWithoutPst(string barcode, double price);
+
+        void AddPriceWithPst(string barcode, double price);
+    }
+
+    public class Catalog : IEditableCatalog
+    {
+        private readonly Dictionary<string, PriceWithTaxes> _prices;
 
         public Catalog()
         {
-            _prices = new Dictionary<string, double>();
+            _prices = new Dictionary<string, PriceWithTaxes>();
         }
 
         public PriceWithTaxes this[string barcode]
         {
-            get { return new PriceWithTaxes(_prices[barcode]); }
+            get { return _prices[barcode]; }
         }
 
         public bool HasBarcode(string barcode)
@@ -29,9 +35,14 @@ namespace ScannerLib
             return _prices.ContainsKey(barcode);
         }
 
-        public void AddProductInfo(string barcode, double price)
+        void IEditableCatalog.AddPriceWithoutPst(string barcode, double price)
         {
-            _prices.Add(barcode, price);
+            _prices.Add(barcode, new PriceWithTaxes(price));
+        }
+
+        void IEditableCatalog.AddPriceWithPst(string barcode, double price)
+        {
+            _prices.Add(barcode, new PriceWithTaxes(price) { PstIncluded = true });
         }
     }
 }

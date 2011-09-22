@@ -15,9 +15,9 @@ namespace Sales.Tests
         {
             _scanner = new Scanner();
             _cashRegisterDisplay = new CashRegisterDisplay();
-            var catalog = new Catalog();
-            catalog.AddProductInfo("12345", 500.00);
-            catalog.AddProductInfo("23456", 750.00);
+            IEditableCatalog catalog = new Catalog();
+            catalog.AddPriceWithoutPst("12345", 500.00);
+            catalog.AddPriceWithPst("23456", 750.00);
 
             _salesPoint = new SalesPoint(catalog, _scanner, _cashRegisterDisplay);
         }
@@ -33,7 +33,7 @@ namespace Sales.Tests
         public void AnotherArticleWithDifferentPriceInEuros()
         {
             _scanner.OnBarcode("23456");
-            Assert.AreEqual("EUR 750.00 G\nTotal: EUR 787.50", _cashRegisterDisplay.Display, "The price of 23456 should be 750.00 with total price 787.50");
+            Assert.AreEqual("EUR 750.00 GP\nTotal: EUR 866.25", _cashRegisterDisplay.Display, "The price of 23456 should be 750.00 with total price 787.50");
         }
 
         [Test]

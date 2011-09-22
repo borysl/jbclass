@@ -6,10 +6,9 @@ namespace Sales.Tests
     [TestFixture]
     public class InMemoryCatalogTests : CatalogContract
     {
-        public override ICatalog CatalogWith(string barcode, double price)
+        public override IEditableCatalog CreateCatalog()
         {
             var catalog = new Catalog();
-            catalog.AddProductInfo(barcode, price);
             return catalog;
         }
     }
