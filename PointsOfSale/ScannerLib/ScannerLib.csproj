@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Catalog.cs" />
     <Compile Include="IScanner.cs" />
+    <Compile Include="PriceWithTaxes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesPoint.cs" />
     <Compile Include="Scanner.cs" />

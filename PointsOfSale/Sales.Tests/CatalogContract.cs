@@ -9,9 +9,11 @@ namespace Sales.Tests
         [Test]
         public void ProductFound()
         {
+            var price = new PriceWithTaxes(500.0);
+
             var catalog = CatalogWith("12345", 500.0);
             Assert.IsTrue(catalog.HasBarcode("12345"));
-            Assert.AreEqual(500.0, catalog["12345"]);
+            Assert.AreEqual(price, catalog["12345"]);
         }
 
         public abstract ICatalog CatalogWith(string s, double d);

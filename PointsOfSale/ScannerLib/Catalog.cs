@@ -4,7 +4,7 @@ namespace ScannerLib
 {
     public interface ICatalog
     {
-        double this[string barcode] { get; }
+        PriceWithTaxes this[string barcode] { get; }
 
         bool HasBarcode(string barcode);
     }
@@ -20,9 +20,9 @@ namespace ScannerLib
             _prices.Add("23456", 750.00);
         }
 
-        public double this[string barcode]
+        public PriceWithTaxes this[string barcode]
         {
-            get { return _prices[barcode]; }
+            get { return new PriceWithTaxes(_prices[barcode]); }
         }
 
         public bool HasBarcode(string barcode)

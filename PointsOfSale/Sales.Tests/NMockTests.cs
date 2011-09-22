@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using NUnit.Mocks;
 using ScannerLib;
 
@@ -27,7 +28,12 @@ namespace Sales.Tests
         [Test]
         public void FoundProductShouldOutputPrice()
         {
-            const double testPrice = 500.0;
+            var testPrice = new PriceWithTaxes
+                                           {
+                                               NetPrice = 500.0,
+                                               PstIncluded = false,
+                                           };
+
             const string testBarcode = "12345";
 
             _mockScreenBuilder.Expect("DisplayPrice", testPrice);
