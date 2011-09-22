@@ -4,8 +4,6 @@ namespace ScannerLib
 {
     public interface IScreen
     {
-        void DisplayPrice(double price);
-
         void DisplayProductNotFound(string barcode);
 
         void DisplayEmptyBarcodeError();
@@ -28,7 +26,7 @@ namespace ScannerLib
             private set;
         }
 
-        public void DisplayPrice(double price)
+        private void DisplayPrice(double price)
         {
             Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", price);
         }
