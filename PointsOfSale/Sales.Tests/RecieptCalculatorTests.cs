@@ -47,6 +47,7 @@ namespace Sales.Tests
             var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
 
             recieptCalculator.ProcessProduct("12345");
+            recieptCalculator.Print();
         }
 
         [Test]
@@ -70,6 +71,34 @@ namespace Sales.Tests
             var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
 
             recieptCalculator.ProcessProduct("23456");
+            recieptCalculator.Print();
+        }
+
+        [Test]
+        public void CreateReceiptWithMultiplePositions()
+        {
+            var etalonReceipt = new Receipt();
+
+            var priceOne = new ReceiptRecord("Item #12345", 500.00);
+            var priceTwo = new ReceiptRecord("Item #23456", 100.00) { PstIncluded = true };
+
+            etalonReceipt.AddRecord(priceOne);
+            etalonReceipt.AddRecord(priceTwo);
+            etalonReceipt.NetTotal = 600.00;
+            etalonReceipt.GstTotal = 30.00;
+            etalonReceipt.PstTotal = 10.5;
+            etalonReceipt.Total = 640.5;
+
+            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
+
+            _mocks.ReplayAll();
+
+            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
+
+            recieptCalculator.ProcessProduct("12345");
+            recieptCalculator.ProcessProduct("23456");
+            recieptCalculator.Print();
         }
     }
 

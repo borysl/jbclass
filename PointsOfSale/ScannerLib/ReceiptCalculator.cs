@@ -4,11 +4,13 @@
     {
         private readonly IReceiptConsumer _recieptConsumer;
         private readonly ICatalog _catalog;
+        private Receipt _reciept;
 
         public ReceiptCalculator(IReceiptConsumer recieptConsumer, ICatalog catalog)
         {
             _recieptConsumer = recieptConsumer;
             _catalog = catalog;
+            PullTheRollingPaper();
         }
 
         public void ProcessProduct(string barcode)
@@ -18,13 +20,22 @@
 
         public void ProcessProduct(ProductPriceInfo price)
         {
-            var reciept = new Receipt();
-            reciept.AddRecord(price);
-            reciept.NetTotal = price.NetPrice;
-            reciept.GstTotal = SalesCalculator.CalculateGst(price);
-            reciept.PstTotal = SalesCalculator.CalculatePst(price);
-            reciept.Total = SalesCalculator.CalculateCost(price);
-            _recieptConsumer.PrintReceipt(reciept);
+            _reciept.AddRecord(price);
+            _reciept.NetTotal += price.NetPrice;
+            _reciept.GstTotal += SalesCalculator.CalculateGst(price);
+            _reciept.PstTotal += SalesCalculator.CalculatePst(price);
+            _reciept.Total += SalesCalculator.CalculateCost(price);
+        }
+
+        public void Print()
+        {
+            _recieptConsumer.PrintReceipt(_reciept);
+            PullTheRollingPaper();
+        }
+
+        private void PullTheRollingPaper()
+        {
+            _reciept = new Receipt();
         }
     }
 }
