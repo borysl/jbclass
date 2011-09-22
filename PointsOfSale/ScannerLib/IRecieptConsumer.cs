@@ -1,4 +1,4 @@
-﻿namespace Sales.Tests
+﻿namespace ScannerLib
 {
     public interface IRecieptConsumer
     {

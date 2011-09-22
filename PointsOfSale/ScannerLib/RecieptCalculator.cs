@@ -1,6 +1,4 @@
-﻿using ScannerLib;
-
-namespace Sales.Tests
+﻿namespace ScannerLib
 {
     public class RecieptCalculator
     {

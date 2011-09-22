@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ScannerLib
+﻿namespace ScannerLib
 {
     public class PriceWithTaxes
     {

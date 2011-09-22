@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ScannerLib;
 
-namespace Sales.Tests
+namespace ScannerLib
 {
     public class Reciept
     {
