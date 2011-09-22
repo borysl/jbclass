@@ -52,6 +52,9 @@
     <Compile Include="CashRegisterDisplayTests.cs" />
     <Compile Include="CatalogContract.cs" />
     <Compile Include="InMemoryCatalogTests.cs" />
+    <Compile Include="IRecieptConsumer.cs" />
+    <Compile Include="Reciept.cs" />
+    <Compile Include="RecieptCalculator.cs" />
     <Compile Include="RecieptCalculatorTests.cs" />
     <Compile Include="SalesPointBehaviorTests.cs" />
     <Compile Include="SimpleSalesTest.cs" />
