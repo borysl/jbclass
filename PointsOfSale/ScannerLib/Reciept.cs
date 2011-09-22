@@ -5,11 +5,11 @@ namespace ScannerLib
 {
     public class Reciept
     {
-        private readonly List<PriceWithTaxes> _price;
+        private readonly List<ProductPriceInfo> _price;
 
         public Reciept()
         {
-            _price = new List<PriceWithTaxes>();
+            _price = new List<ProductPriceInfo>();
         }
 
         public double NetTotal { get; set; }
@@ -20,14 +20,14 @@ namespace ScannerLib
 
         public double Total { get; set; }
 
-        public void AddRecord(PriceWithTaxes price)
+        public void AddRecord(ProductPriceInfo price)
         {
             _price.Add(price);
         }
 
         public void AddRecordWithoutPst(double price)
         {
-            var fullPrice = new PriceWithTaxes { NetPrice = price, PstIncluded = false };
+            var fullPrice = new ProductPriceInfo { NetPrice = price, PstIncluded = false };
             _price.Add(fullPrice);
         }
 

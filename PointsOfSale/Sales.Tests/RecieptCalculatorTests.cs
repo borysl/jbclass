@@ -25,7 +25,7 @@ namespace Sales.Tests
         public void CreateRecieptForSingleItemWithoutPst()
         {
             var etalonReciept = new Reciept();
-            var price = new PriceWithTaxes(500.00);
+            var price = new ProductPriceInfo(500.00);
 
             etalonReciept.AddRecord(price);
             etalonReciept.NetTotal = 500.00;
@@ -48,7 +48,7 @@ namespace Sales.Tests
         {
             var etalonReciept = new Reciept();
 
-            var price = new PriceWithTaxes(100.00) { PstIncluded = true };
+            var price = new ProductPriceInfo(100.00) { PstIncluded = true };
 
             etalonReciept.AddRecord(price);
             etalonReciept.NetTotal = 100.00;

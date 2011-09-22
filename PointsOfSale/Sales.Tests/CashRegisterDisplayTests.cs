@@ -17,7 +17,7 @@ namespace Sales.Tests
         [Test]
         public void DisplayPriceWithoutPst()
         {
-            var priceWithoutPst = new PriceWithTaxes(500.0);
+            var priceWithoutPst = new ProductPriceInfo(500.0);
 
             _cashRegisterDisplay.DisplayProductInfo(priceWithoutPst);
 
@@ -27,7 +27,7 @@ namespace Sales.Tests
         [Test]
         public void DisplayPriceWithPst()
         {
-            var priceWithoutPst = new PriceWithTaxes(100.0)
+            var priceWithoutPst = new ProductPriceInfo(100.0)
                                       {
                                           PstIncluded = true,
                                       };

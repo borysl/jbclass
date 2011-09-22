@@ -27,7 +27,7 @@ namespace Sales.Tests
         [Test]
         public void FoundProductShouldOutputPrice()
         {
-            var testPrice = new PriceWithTaxes
+            var testPrice = new ProductPriceInfo
                                            {
                                                NetPrice = 500.0,
                                                PstIncluded = false,

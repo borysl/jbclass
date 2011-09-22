@@ -9,7 +9,7 @@
             _recieptConsumer = recieptConsumer;
         }
 
-        public void ProcessProduct(PriceWithTaxes price)
+        public void ProcessProduct(ProductPriceInfo price)
         {
             var reciept = new Reciept();
             reciept.AddRecord(price);

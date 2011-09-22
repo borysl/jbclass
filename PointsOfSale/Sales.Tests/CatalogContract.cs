@@ -9,7 +9,7 @@ namespace Sales.Tests
         [Test]
         public void ProductFound()
         {
-            var price = new PriceWithTaxes(500.0);
+            var price = new ProductPriceInfo(500.0);
 
             IEditableCatalog catalog = CreateCatalog();
             catalog.AddPriceWithoutPst("12345", 500.0);
@@ -30,7 +30,7 @@ namespace Sales.Tests
         [Test]
         public void ProductWithPstFound()
         {
-            var price = new PriceWithTaxes(100.00) { PstIncluded = true };
+            var price = new ProductPriceInfo(100.00) { PstIncluded = true };
 
             IEditableCatalog catalog = CreateCatalog();
 

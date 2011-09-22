@@ -27,24 +27,13 @@ namespace ScannerLib
             Display = "Scan error: Empty barcode.";
         }
 
-        public void DisplayProductInfo(PriceWithTaxes testPrice)
-        {
-            var productPriceInfo = new ProductPriceInfo
-                                        {
-                                            NetPrice = testPrice.NetPrice,
-                                            PstIncluded = testPrice.PstIncluded,
-                                        };
-
-            DisplayProductInfo(productPriceInfo);
-        }
-
         public void DisplayProductInfo(ProductPriceInfo testPrice)
         {
             Display = string.Format(
                 _numberFormatInfo, 
                 "EUR {0:###.00} G{2}\nTotal: EUR {1:###.00}", 
-                testPrice.NetPrice, 
-                testPrice.Cost,
+                testPrice.NetPrice,
+                SalesCalculator.CalculateCost(testPrice),
                 testPrice.PstIncluded ? "P" : string.Empty);
         }
     }

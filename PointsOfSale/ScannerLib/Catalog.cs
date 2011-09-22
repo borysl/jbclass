@@ -4,7 +4,7 @@ namespace ScannerLib
 {
     public interface ICatalog
     {
-        PriceWithTaxes this[string barcode] { get; }
+        ProductPriceInfo this[string barcode] { get; }
 
         bool HasBarcode(string barcode);
     }
@@ -18,14 +18,14 @@ namespace ScannerLib
 
     public class Catalog : IEditableCatalog
     {
-        private readonly Dictionary<string, PriceWithTaxes> _prices;
+        private readonly Dictionary<string, ProductPriceInfo> _prices;
 
         public Catalog()
         {
-            _prices = new Dictionary<string, PriceWithTaxes>();
+            _prices = new Dictionary<string, ProductPriceInfo>();
         }
 
-        public PriceWithTaxes this[string barcode]
+        public ProductPriceInfo this[string barcode]
         {
             get { return _prices[barcode]; }
         }
@@ -37,12 +37,12 @@ namespace ScannerLib
 
         void IEditableCatalog.AddPriceWithoutPst(string barcode, double price)
         {
-            _prices.Add(barcode, new PriceWithTaxes(price));
+            _prices.Add(barcode, new ProductPriceInfo(price));
         }
 
         void IEditableCatalog.AddPriceWithPst(string barcode, double price)
         {
-            _prices.Add(barcode, new PriceWithTaxes(price) { PstIncluded = true });
+            _prices.Add(barcode, new ProductPriceInfo(price) { PstIncluded = true });
         }
     }
 }
