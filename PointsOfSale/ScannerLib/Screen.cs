@@ -29,7 +29,26 @@ namespace ScannerLib
 
         public void DisplayProductInfo(PriceWithTaxes testPrice)
         {
-            Display = string.Format(_numberFormatInfo, "EUR {0:###.00}", testPrice.NetPrice);
+            var productPriceInfo = new ProductPriceInfo
+                                        {
+                                            NetPrice = testPrice.NetPrice,
+                                            PstIncluded = testPrice.PstIncluded,
+                                        };
+
+            DisplayProductInfo(productPriceInfo);
+        }
+
+        public void DisplayProductInfo(ProductPriceInfo testPrice)
+        {
+            Display = string.Format(_numberFormatInfo, "EUR {0:###.00} G\nTotal: EUR {1:###.00}", testPrice.NetPrice, testPrice.Total);
+        }
+    }
+
+    public class ProductPriceInfo : PriceWithTaxes
+    {
+        public double Total
+        {
+            get { return NetPrice * 1.05; }
         }
     }
 }

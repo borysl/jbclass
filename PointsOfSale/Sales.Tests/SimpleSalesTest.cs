@@ -26,14 +26,14 @@ namespace Sales.Tests
         public void ArticleShouldGetPriceInEuros()
         {
             _scanner.OnBarcode("12345");
-            Assert.AreEqual("EUR 500.00", _cashRegisterDisplay.Display, "The price of 12345 should be 500.00");
+            Assert.AreEqual("EUR 500.00 G\nTotal: EUR 525.00", _cashRegisterDisplay.Display, "The price of 12345 should be 500.00 with total price");
         }
 
         [Test]
         public void AnotherArticleWithDifferentPriceInEuros()
         {
             _scanner.OnBarcode("23456");
-            Assert.AreEqual("EUR 750.00", _cashRegisterDisplay.Display, "The price of 234567 should be 750.00");
+            Assert.AreEqual("EUR 750.00 G\nTotal: EUR 787.50", _cashRegisterDisplay.Display, "The price of 23456 should be 750.00 with total price 787.50");
         }
 
         [Test]

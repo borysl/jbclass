@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CashRegisterDisplayTests.cs" />
     <Compile Include="CatalogContract.cs" />
     <Compile Include="InMemoryCatalogTests.cs" />
     <Compile Include="SalesPointBehaviorTests.cs" />

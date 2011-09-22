@@ -7,5 +7,7 @@
         void DisplayEmptyBarcodeError();
 
         void DisplayProductInfo(PriceWithTaxes testPrice);
+
+        void DisplayProductInfo(ProductPriceInfo testPrice);
     }
 }
