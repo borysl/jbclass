@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Rhino.Mocks;
 using ScannerLib;
 
@@ -8,11 +9,16 @@ namespace Sales.Tests
     public class ReceiptCalculatorTests
     {
         private MockRepository _mocks;
+        private ICatalog _catalog;
 
         [SetUp]
         public void InitializeMock()
         {
             _mocks = new MockRepository();
+
+            _catalog = _mocks.Stub<ICatalog>();
+            _catalog.Stub(_ => _["12345"]).Return(new ProductPriceInfo(500.00));
+            _catalog.Stub(_ => _["23456"]).Return(new ProductPriceInfo(100.00) { PstIncluded = true });
         }
 
         [TearDown]
@@ -25,7 +31,7 @@ namespace Sales.Tests
         public void CreateReceiptForSingleItemWithoutPst()
         {
             var etalonReceipt = new Receipt();
-            var price = new ProductPriceInfo(500.00);
+            var price = new ReceiptRecord("Item #12345", 500.00);
 
             etalonReceipt.AddRecord(price);
             etalonReceipt.NetTotal = 500.00;
@@ -34,13 +40,13 @@ namespace Sales.Tests
             etalonReceipt.Total = 525.00;
 
             var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
-            Expect.Call(delegate { recieptConsumer.PrintReceipt(etalonReceipt); });
+            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new ReceiptCalculator(recieptConsumer);
+            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
 
-            recieptCalculator.ProcessProduct(price);
+            recieptCalculator.ProcessProduct("12345");
         }
 
         [Test]
@@ -48,7 +54,7 @@ namespace Sales.Tests
         {
             var etalonReceipt = new Receipt();
 
-            var price = new ProductPriceInfo(100.00) { PstIncluded = true };
+            var price = new ReceiptRecord("Item #23456", 100.00) { PstIncluded = true };
 
             etalonReceipt.AddRecord(price);
             etalonReceipt.NetTotal = 100.00;
@@ -57,13 +63,24 @@ namespace Sales.Tests
             etalonReceipt.Total = 115.5;
 
             var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
-            Expect.Call(delegate { recieptConsumer.PrintReceipt(etalonReceipt); });
+            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new ReceiptCalculator(recieptConsumer);
+            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
 
-            recieptCalculator.ProcessProduct(price);
+            recieptCalculator.ProcessProduct("23456");
         }
+    }
+
+    public class ReceiptRecord : ProductPriceInfo
+    {
+        public ReceiptRecord(string itemName, double price)
+            : base(price)
+        {
+            ItemName = itemName;
+        }
+
+        public string ItemName { get; set; }
     }
 }

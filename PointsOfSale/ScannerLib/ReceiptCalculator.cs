@@ -3,10 +3,17 @@
     public class ReceiptCalculator
     {
         private readonly IReceiptConsumer _recieptConsumer;
+        private readonly ICatalog _catalog;
 
-        public ReceiptCalculator(IReceiptConsumer recieptConsumer)
+        public ReceiptCalculator(IReceiptConsumer recieptConsumer, ICatalog catalog)
         {
             _recieptConsumer = recieptConsumer;
+            _catalog = catalog;
+        }
+
+        public void ProcessProduct(string barcode)
+        {
+            ProcessProduct(_catalog[barcode]);
         }
 
         public void ProcessProduct(ProductPriceInfo price)
