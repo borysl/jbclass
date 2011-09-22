@@ -16,6 +16,9 @@ namespace Sales.Tests
             _scanner = new Scanner();
             _screen = new Screen();
             var catalog = new Catalog();
+            catalog.AddProductInfo("12345", 500.00);
+            catalog.AddProductInfo("23456", 750.00);
+
             _salesPoint = new SalesPoint(catalog, _scanner, _screen);
         }
 

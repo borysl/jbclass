@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ScannerLib
 {
@@ -16,8 +17,6 @@ namespace ScannerLib
         public Catalog()
         {
             _prices = new Dictionary<string, double>();
-            _prices.Add("12345", 500.00);
-            _prices.Add("23456", 750.00);
         }
 
         public PriceWithTaxes this[string barcode]
@@ -28,6 +27,11 @@ namespace ScannerLib
         public bool HasBarcode(string barcode)
         {
             return _prices.ContainsKey(barcode);
+        }
+
+        public void AddProductInfo(string barcode, double price)
+        {
+            _prices.Add(barcode, price);
         }
     }
 }

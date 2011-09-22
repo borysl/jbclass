@@ -16,6 +16,6 @@ namespace Sales.Tests
             Assert.AreEqual(price, catalog["12345"]);
         }
 
-        public abstract ICatalog CatalogWith(string s, double d);
+        public abstract ICatalog CatalogWith(string barcode, double price);
     }
 }
