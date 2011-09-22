@@ -40,7 +40,12 @@ namespace ScannerLib
 
         public void DisplayProductInfo(ProductPriceInfo testPrice)
         {
-            Display = string.Format(_numberFormatInfo, "EUR {0:###.00} G\nTotal: EUR {1:###.00}", testPrice.NetPrice, testPrice.Total);
+            Display = string.Format(
+                _numberFormatInfo, 
+                "EUR {0:###.00} G{2}\nTotal: EUR {1:###.00}", 
+                testPrice.NetPrice, 
+                testPrice.Total,
+                testPrice.PstIncluded ? "P" : string.Empty);
         }
     }
 
@@ -48,7 +53,12 @@ namespace ScannerLib
     {
         public double Total
         {
-            get { return NetPrice * 1.05; }
+            get
+            {
+                var fullPrice = NetPrice * 1.05;
+                if (PstIncluded) fullPrice *= 1.1;
+                return fullPrice;
+            }
         }
     }
 }
