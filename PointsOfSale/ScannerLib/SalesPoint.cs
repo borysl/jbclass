@@ -1,6 +1,6 @@
 ﻿namespace ScannerLib
 {
-    public class SalesPoint
+    public class SalesPoint : ISalesPoint
     {
         private readonly ICatalog _catalog;
         private readonly ICashRegisterDisplay _cashRegisterDisplay;
@@ -12,7 +12,7 @@
             _cashRegisterDisplay = cashRegisterDisplay;
         }
 
-        public void Scan(string barcode)
+        public void OnBarcode(string barcode)
         {
             if (string.IsNullOrEmpty(barcode))
             {

@@ -46,7 +46,7 @@ namespace Sales.Tests
 
             var salesPoint = new SalesPoint(mockCatalog, mockScreen);
 
-            salesPoint.Scan(testBarcode);
+            salesPoint.OnBarcode(testBarcode);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace Sales.Tests
 
             var salesPoint = new SalesPoint(mockCatalog, mockScreen);
 
-            salesPoint.Scan(testBarcode);
+            salesPoint.OnBarcode(testBarcode);
         }
     }
 }
