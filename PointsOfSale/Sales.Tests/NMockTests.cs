@@ -5,7 +5,7 @@ using ScannerLib;
 namespace Sales.Tests
 {
     [TestFixture]
-    public class MockTests
+    public class NMockTests
     {
         [Test]
         public void FoundProductShouldOutputPrice()
@@ -21,6 +21,33 @@ namespace Sales.Tests
             var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
             mockCatalogBuilder.ExpectAndReturn("get_Item", testPrice, testBarcode);
             mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, testBarcode);
+
+            var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
+
+            var scanner = new Scanner();
+
+            var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
+
+            salesPoint.Scan(testBarcode);
+
+            mockScreenBuilder.Verify();
+            mockCatalogBuilder.Verify();
+        }
+
+        [Test]
+        public void NoGoodFoundReturnsError()
+        {
+            const string testBarcode = "12345";
+
+            var mockScreenBuilder = new DynamicMock(typeof(IScreen));
+            mockScreenBuilder.ExpectNoCall("DisplayPrice");
+            mockScreenBuilder.Expect("DisplayProductNotFound", testBarcode);
+
+            var mockScreen = (IScreen)mockScreenBuilder.MockInstance;
+
+            var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
+            mockCatalogBuilder.ExpectNoCall("get_Item");
+            mockCatalogBuilder.ExpectAndReturn("HasBarcode", false, testBarcode);
 
             var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
 
