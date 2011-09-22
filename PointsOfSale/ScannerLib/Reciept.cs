@@ -20,6 +20,11 @@ namespace ScannerLib
 
         public double Total { get; set; }
 
+        public void AddRecord(PriceWithTaxes price)
+        {
+            _price.Add(price);
+        }
+
         public void AddRecordWithoutPst(double price)
         {
             var fullPrice = new PriceWithTaxes { NetPrice = price, PstIncluded = false };
@@ -43,6 +48,11 @@ namespace ScannerLib
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return NetTotal.ToString();
         }
     }
 }
