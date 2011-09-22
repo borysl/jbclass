@@ -44,14 +44,14 @@ namespace ScannerLib
                 _numberFormatInfo, 
                 "EUR {0:###.00} G{2}\nTotal: EUR {1:###.00}", 
                 testPrice.NetPrice, 
-                testPrice.Total,
+                testPrice.Cost,
                 testPrice.PstIncluded ? "P" : string.Empty);
         }
     }
 
     public class ProductPriceInfo : PriceWithTaxes
     {
-        public double Total
+        public double Cost
         {
             get
             {
