@@ -6,7 +6,7 @@ namespace ScannerLib
     {
         public static double CalculateGst(ProductPriceInfo price)
         {
-            return price.NetPrice * 0.05;
+            return Math.Round(price.NetPrice * 0.05, 2);
         }
 
         public static double CalculateCost(ProductPriceInfo price)
@@ -16,7 +16,7 @@ namespace ScannerLib
 
         public static double CalculatePst(ProductPriceInfo price)
         {
-            return price.PstIncluded ? (price.NetPrice + CalculateGst(price)) * 0.1 : 0;
+            return price.PstIncluded ? Math.Round((price.NetPrice + CalculateGst(price)) * 0.1, 2) : 0;
         }
     }
 }

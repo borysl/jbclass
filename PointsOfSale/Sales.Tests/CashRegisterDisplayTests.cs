@@ -36,5 +36,18 @@ namespace Sales.Tests
 
             Assert.AreEqual("EUR 100.00 GP\nTotal: EUR 115.50", _cashRegisterDisplay.Display, "The price of 12345 should be 500.00 with total price");
         }
+
+        [Test]
+        public void CunningPrice()
+        {
+            var priceWithoutPst = new ProductPriceInfo(9.10)
+            {
+                PstIncluded = true,
+            };
+
+            _cashRegisterDisplay.DisplayProductInfo(priceWithoutPst);
+
+            Assert.AreEqual("EUR 9.10 GP\nTotal: EUR 10.52", _cashRegisterDisplay.Display, "Proposed by JB to check the problems with calculation");
+        }
     }
 }
