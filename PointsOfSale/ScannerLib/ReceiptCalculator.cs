@@ -2,13 +2,13 @@
 {
     public class ReceiptCalculator
     {
-        private readonly IReceiptConsumer _recieptConsumer;
+        private readonly IReceiptConsumer _receiptConsumer;
         private readonly ICatalog _catalog;
-        private Receipt _reciept;
+        private Receipt _receipt;
 
-        public ReceiptCalculator(IReceiptConsumer recieptConsumer, ICatalog catalog)
+        public ReceiptCalculator(IReceiptConsumer receiptConsumer, ICatalog catalog)
         {
-            _recieptConsumer = recieptConsumer;
+            _receiptConsumer = receiptConsumer;
             _catalog = catalog;
             PullTheRollingPaper();
         }
@@ -20,22 +20,22 @@
 
         public void ProcessProduct(ProductPriceInfo price)
         {
-            _reciept.AddRecord(price);
-            _reciept.NetTotal += price.NetPrice;
-            _reciept.GstTotal += SalesCalculator.CalculateGst(price);
-            _reciept.PstTotal += SalesCalculator.CalculatePst(price);
-            _reciept.Total += SalesCalculator.CalculateCost(price);
+            _receipt.AddRecord(price);
+            _receipt.NetTotal += price.NetPrice;
+            _receipt.GstTotal += SalesCalculator.CalculateGst(price);
+            _receipt.PstTotal += SalesCalculator.CalculatePst(price);
+            _receipt.Total += SalesCalculator.CalculateCost(price);
         }
 
         public void Print()
         {
-            _recieptConsumer.PrintReceipt(_reciept);
+            _receiptConsumer.PrintReceipt(_receipt);
             PullTheRollingPaper();
         }
 
         private void PullTheRollingPaper()
         {
-            _reciept = new Receipt();
+            _receipt = new Receipt();
         }
     }
 }

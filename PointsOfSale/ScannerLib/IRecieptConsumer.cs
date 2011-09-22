@@ -2,6 +2,6 @@
 {
     public interface IReceiptConsumer
     {
-        void PrintReceipt(Receipt reciept);
+        void PrintReceipt(Receipt receipt);
     }
 }

@@ -39,15 +39,15 @@ namespace Sales.Tests
             etalonReceipt.PstTotal = 0.0;
             etalonReceipt.Total = 525.00;
 
-            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
-            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
+            var receiptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(() => receiptConsumer.PrintReceipt(etalonReceipt));
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
+            var receiptCalculator = new ReceiptCalculator(receiptConsumer, _catalog);
 
-            recieptCalculator.ProcessProduct("12345");
-            recieptCalculator.Print();
+            receiptCalculator.ProcessProduct("12345");
+            receiptCalculator.Print();
         }
 
         [Test]
@@ -63,15 +63,15 @@ namespace Sales.Tests
             etalonReceipt.PstTotal = 10.5;
             etalonReceipt.Total = 115.5;
 
-            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
-            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
+            var receiptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(() => receiptConsumer.PrintReceipt(etalonReceipt));
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
+            var receiptCalculator = new ReceiptCalculator(receiptConsumer, _catalog);
 
-            recieptCalculator.ProcessProduct("23456");
-            recieptCalculator.Print();
+            receiptCalculator.ProcessProduct("23456");
+            receiptCalculator.Print();
         }
 
         [Test]
@@ -89,16 +89,16 @@ namespace Sales.Tests
             etalonReceipt.PstTotal = 10.5;
             etalonReceipt.Total = 640.5;
 
-            var recieptConsumer = _mocks.StrictMock<IReceiptConsumer>();
-            Expect.Call(() => recieptConsumer.PrintReceipt(etalonReceipt));
+            var receiptConsumer = _mocks.StrictMock<IReceiptConsumer>();
+            Expect.Call(() => receiptConsumer.PrintReceipt(etalonReceipt));
 
             _mocks.ReplayAll();
 
-            var recieptCalculator = new ReceiptCalculator(recieptConsumer, _catalog);
+            var receiptCalculator = new ReceiptCalculator(receiptConsumer, _catalog);
 
-            recieptCalculator.ProcessProduct("12345");
-            recieptCalculator.ProcessProduct("23456");
-            recieptCalculator.Print();
+            receiptCalculator.ProcessProduct("12345");
+            receiptCalculator.ProcessProduct("23456");
+            receiptCalculator.Print();
         }
     }
 
