@@ -7,31 +7,43 @@ namespace Sales.Tests
     [TestFixture]
     public class NMockTests
     {
+        private DynamicMock _mockScreenBuilder;
+        private DynamicMock _mockCatalogBuilder;
+
+        [SetUp]
+        public void Initialize()
+        {
+            _mockScreenBuilder = new DynamicMock(typeof(IScreen));
+            _mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
+        }
+
+        [TearDown]
+        public void Verify()
+        {
+            _mockScreenBuilder.Verify();
+            _mockCatalogBuilder.Verify();
+        }
+
         [Test]
         public void FoundProductShouldOutputPrice()
         {
             const double testPrice = 500.0;
             const string testBarcode = "12345";
 
-            var mockScreenBuilder = new DynamicMock(typeof(IScreen));
-            mockScreenBuilder.Expect("DisplayPrice", testPrice);
+            _mockScreenBuilder.Expect("DisplayPrice", testPrice);
 
-            var mockScreen = (IScreen)mockScreenBuilder.MockInstance;
+            var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;
 
-            var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
-            mockCatalogBuilder.ExpectAndReturn("get_Item", testPrice, testBarcode);
-            mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, testBarcode);
+            _mockCatalogBuilder.ExpectAndReturn("get_Item", testPrice, testBarcode);
+            _mockCatalogBuilder.ExpectAndReturn("HasBarcode", true, testBarcode);
 
-            var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
+            var mockCatalog = (ICatalog)_mockCatalogBuilder.MockInstance;
 
             var scanner = new Scanner();
 
             var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
 
             salesPoint.Scan(testBarcode);
-
-            mockScreenBuilder.Verify();
-            mockCatalogBuilder.Verify();
         }
 
         [Test]
@@ -39,26 +51,21 @@ namespace Sales.Tests
         {
             const string testBarcode = "12345";
 
-            var mockScreenBuilder = new DynamicMock(typeof(IScreen));
-            mockScreenBuilder.ExpectNoCall("DisplayPrice");
-            mockScreenBuilder.Expect("DisplayProductNotFound", testBarcode);
+            _mockScreenBuilder.ExpectNoCall("DisplayPrice");
+            _mockScreenBuilder.Expect("DisplayProductNotFound", testBarcode);
 
-            var mockScreen = (IScreen)mockScreenBuilder.MockInstance;
+            var mockScreen = (IScreen)_mockScreenBuilder.MockInstance;
 
-            var mockCatalogBuilder = new DynamicMock(typeof(ICatalog));
-            mockCatalogBuilder.ExpectNoCall("get_Item");
-            mockCatalogBuilder.ExpectAndReturn("HasBarcode", false, testBarcode);
+            _mockCatalogBuilder.ExpectNoCall("get_Item");
+            _mockCatalogBuilder.ExpectAndReturn("HasBarcode", false, testBarcode);
 
-            var mockCatalog = (ICatalog)mockCatalogBuilder.MockInstance;
+            var mockCatalog = (ICatalog)_mockCatalogBuilder.MockInstance;
 
             var scanner = new Scanner();
 
             var salesPoint = new SalesPoint(mockCatalog, scanner, mockScreen);
 
             salesPoint.Scan(testBarcode);
-
-            mockScreenBuilder.Verify();
-            mockCatalogBuilder.Verify();
         }
     }
 }
