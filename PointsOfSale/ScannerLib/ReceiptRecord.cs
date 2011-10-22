@@ -22,5 +22,10 @@
 
             return true;
         }
+
+        public override int GetHashCode()
+        {
+            return ItemName.GetHashCode();
+        }
     }
 }
